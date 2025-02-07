@@ -12,7 +12,7 @@ This can be used for **interactive installations**, **shadow boxes**, or **proxi
 
 Also check out [a more bare-bones project using the ultrasonic distance sensor](https://projecthub.arduino.cc/Isaac100/getting-started-with-the-hc-sr04-ultrasonic-sensor-7cabe1) on Arduino Project Hub.
 
-The code is in **[DistanceSensorGate.ino](DistanceSensorGate.ino)**.
+The code is in [DistanceSensorGate.ino](DistanceSensorGate.ino).
 Click "Raw" to get the code, then paste it into the [Arduino IDE](https://www.arduino.cc/en/software)
 and upload the program to your Arduino.
 
