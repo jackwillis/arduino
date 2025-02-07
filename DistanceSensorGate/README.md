@@ -39,7 +39,7 @@ This can be used for **interactive installations**, **shadow boxes**, or **proxi
 
 ## Circuit Diagram
 ### **Breadboard Layout**  
-📌 *The ultrasonic sensor should be pointing upwards (toward the top of the screen), away from the Arduino.*  
+📌 *The ultrasonic sensor should be pointing outwards (toward the top of the screen, not into the screen), away from the Arduino.*  
 ![Breadboard Layout](DistanceSensorGate_bb.png)
 
 ### **Schematic**
