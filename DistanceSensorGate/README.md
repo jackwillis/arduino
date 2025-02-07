@@ -38,7 +38,8 @@ This can be used for **interactive installations**, **shadow boxes**, or **proxi
 ---
 
 ## Circuit Diagram
-### **Breadboard Layout**
+### **Breadboard Layout**  
+📌 *The ultrasonic sensor should be pointing upwards (toward the top of the screen), away from the Arduino.*  
 ![Breadboard Layout](DistanceSensorGate_bb.png)
 
 ### **Schematic**
@@ -79,15 +80,14 @@ This can be used for **interactive installations**, **shadow boxes**, or **proxi
 
 ---
 
-## Troubleshooting
-- **Nothing is working?** Double-check wiring, especially **power (5V, GND)** connections.
-- **Sensor acting strangely?** Ensure it's **not facing reflective surfaces** or **too far from objects**.
-- **LED not lighting up?** Check if it's wired correctly and the resistor is in series.
-- **Buzzer not making sound?** Make sure it's wired with the **positive lead to Pin 8**.
-
----
-
 ## Next Steps
 - Integrate into a **shadow box or two-way mirror** for hidden reveals.
 - Add **multiple sensors** for more interactive zones.
 - Control **other outputs** (e.g., motors, relays) for expanded installations.
+
+---
+
+## License
+This project is public domain. Modify, share, and improve it as needed!
+
+https://creativecommons.org/public-domain/cc0/
