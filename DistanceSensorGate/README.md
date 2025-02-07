@@ -1,7 +1,7 @@
 # Distance Sensor Gate with Arduino
 
 ## Overview
-This project creates an interactive **distance-based gate** using an **ultrasonic sensor (HC-SR04)**, a **blue LED**, and a **piezo buzzer**. 
+This project creates an interactive **distance-based gate** using an **ultrasonic sensor (HC-SR04)**, a **blue LED**, and an optional **piezo buzzer**. 
 
 - As a person or object approaches, the **LED gradually fades in**.
 - When they move away, the **LED fades out**.
@@ -31,15 +31,19 @@ This can be used for **interactive installations**, **shadow boxes**, or **proxi
 | **HC-SR04**       | Measures distance |
 | **Blue LED**      | Indicates gate status |
 | **220Ω Resistor** | Limits LED current |
-| **Piezo Buzzer**  | Provides audio feedback |
+| **Piezo Buzzer**  | Provides audio feedback (optional) |
 | **Jumper Wires**  | Connects components |
 | **Breadboard**    | For prototyping |
 
 ---
 
+## Example build
+📌 *There's some extra LEDs in the picture which are not connected.*
+![Example project board on a breadboard](build001.jpg)
+
 ## Circuit Diagram
 ### **Breadboard Layout**  
-📌 *The ultrasonic sensor should be pointing upwards (toward the top of the screen), away from the Arduino.*  
+📌 *The ultrasonic sensor plugs into the board and points away from the Arduino (towards the top of the screen, not into the screen as depicted).*  
 ![Breadboard Layout](DistanceSensorGate_bb.png)
 
 ### **Schematic**
@@ -58,7 +62,7 @@ This can be used for **interactive installations**, **shadow boxes**, or **proxi
 - **Anode (+)** → **220Ω Resistor** → Pin **9**  
 - **Cathode (-)** → GND  
 
-### **Piezo Buzzer**
+### **Piezo Buzzer** (optional)
 - **Positive (+)** → Pin **8**  
 - **Negative (-)** → GND  
 

@@ -46,10 +46,10 @@ GateState prevGateState = IDLE;
 // ----- Setup -----
 void setup() {
   Serial.begin(9600);
-  pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
-  pinMode(PIEZO_PIN, OUTPUT);
-  pinMode(LED_PIN, OUTPUT);
+  pinMode(TRIG_PIN,   OUTPUT);
+  pinMode(ECHO_PIN,   INPUT);
+  pinMode(PIEZO_PIN,  OUTPUT);
+  pinMode(LED_PIN,    OUTPUT);
   float init = readUltrasonic();
   smoothedDistance = constrain(init, MIN_DISTANCE, MAX_DISTANCE);
 }
@@ -62,7 +62,7 @@ void loop() {
   updateLED();
   beepOnGateStateChange();
   
-  if (++frameCounter >= FRAME_INTERVAL) {
+  if (++frameCounter >= FRAME_INTERVAL || gateState != prevGateState) {
     Serial.print("Raw: "); Serial.print(distance);
     Serial.print(" cm, Smoothed: "); Serial.print(smoothedDistance);
     Serial.print(" cm, State: ");
@@ -82,6 +82,7 @@ float readUltrasonic() {
   delayMicroseconds(10);
   digitalWrite(TRIG_PIN, LOW);
   long dur = pulseIn(ECHO_PIN, HIGH, 30000);
+  // Time constant taken from Arduino documentation
   return (dur == 0) ? MAX_DISTANCE : (dur * 0.0343) / 2.0;
 }
 
@@ -123,22 +124,42 @@ void updateGateState() {
 
 // ----- Function: Update LED -----
 void updateLED() {
-  int target = (gateState == TRIGGERED) ? 255 : 0;
-  ledBrightness = constrain(ledBrightness + ((ledBrightness < target) ? LED_FADE_STEP : -LED_FADE_STEP), 0, 255);
+  int target = (gateState == TRIGGERED || gateState == RELEASING) ? 255 : 0;
+  int ledBrightnessChange = (ledBrightness < target) ? LED_FADE_STEP : -LED_FADE_STEP;
+  ledBrightness += ledBrightnessChange;
+  ledBrightness = constrain(ledBrightness, 0, 255);
   analogWrite(LED_PIN, ledBrightness);
 }
 
 // ----- Beep Functions -----
-void beepTriggered() { tone(PIEZO_PIN, 1000, 200); }
-void beepReleased() { tone(PIEZO_PIN, 500, 200); }
+void beepTriggered() {
+  tone(PIEZO_PIN, 1000, 200);
+}
+void beepReleased() {
+  tone(PIEZO_PIN, 500, 200);
+}
 
 // ----- Function: Beep on Gate State Change -----
 void beepOnGateStateChange() {
-  if (gateState != prevGateState) {
-    if (gateState == TRIGGERED) beepTriggered();
-    else if (gateState == IDLE && (prevGateState == TRIGGERED || prevGateState == RELEASING)) beepReleased();
+  if (gateState == prevGateState) {
+    return;
+  }
+
+  switch (gateState) {
+    case TRIGGERED:
+      if (prevGateState != RELEASING) {
+        beepTriggered();
+      }
+      break;
+
+    case IDLE:
+      if (prevGateState == TRIGGERED || prevGateState == RELEASING) {
+        beepReleased();
+      }
+      break;
   }
 }
+
 
 // ----- Function: Print Gate State -----
 void printGateState() {
