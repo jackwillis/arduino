@@ -77,7 +77,7 @@ void loop() {
   }
   frameCounter += 1;
   
-  delay(10);
+  delay(10); // Short delay to stabilize sensor readings and avoid excessive loop execution
 }
 
 // ----- Function: Read Ultrasonic Sensor -----
