@@ -10,6 +10,8 @@ This project creates an interactive **distance-based gate** using an **ultrasoni
 
 This can be used for **interactive installations**, **shadow boxes**, or **proximity-based lighting effects**.
 
+The code can be found at **[DistanceSensorGate.ino](DistanceSensorGate.ino)**.
+
 ---
 
 ## How It Works
@@ -65,7 +67,7 @@ This can be used for **interactive installations**, **shadow boxes**, or **proxi
 ---
 
 ## Operation
-1. **Upload the provided code** to the Arduino.
+1. **Upload the [provided code](DistanceSensorGate.ino)** to the Arduino.
 2. Place an object **within ~100 cm** → The **LED fades in** and the **buzzer beeps**.
 3. Stay in range for **250ms** to activate the gate.
 4. Move **beyond 200 cm** for **1 second** → The **LED fades out** and the **buzzer signals exit**.
