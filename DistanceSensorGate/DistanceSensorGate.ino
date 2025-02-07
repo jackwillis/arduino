@@ -72,13 +72,7 @@ void loop() {
   // Print the debug info only when the state changes or the frame counter reaches the limit
   bool itsTimeToPrint = (gateState != prevGateState) || (frameCounter >= FRAME_INTERVAL);
   if (itsTimeToPrint) {
-    Serial.print("Raw: ");
-    Serial.print(distance);
-    Serial.print(" cm, Smoothed: ");
-    Serial.print(smoothedDistance);
-    Serial.print(" cm, State: ");
-    printGateState();
-    Serial.println();
+    printDebugInformation();
     frameCounter = 0;
   }
   frameCounter += 1;
@@ -184,13 +178,24 @@ void beepOnGateStateChange() {
   }
 }
 
+// ----- Function: Print Debug Information -----
+void printDebugInformation() {
+  Serial.print("Raw: ");
+  Serial.print(distance);
+  Serial.print(" cm, Smoothed: ");
+  Serial.print(smoothedDistance);
+  Serial.print(" cm, State: ");
+  Serial.print(stateStr());
+  Serial.println();
+}
 
-// ----- Function: Print Gate State -----
-void printGateState() {
+// Returns the gate state as a printable str
+const char* stateStr() {
   switch (gateState) {
-    case IDLE:        Serial.print("IDLE");       break;
-    case TRIGGERING:  Serial.print("TRIGGERING"); break;
-    case TRIGGERED:   Serial.print("TRIGGERED");  break;
-    case RELEASING:   Serial.print("RELEASING");  break;
+    case IDLE:        return "IDLE";
+    case TRIGGERING:  return "TRIGGERING";
+    case TRIGGERED:   return "TRIGGERED";
+    case RELEASING:   return "RELEASING";
   }
+  return "UNKNOWN";
 }
