@@ -144,6 +144,18 @@ void updateLED() {
 }
 
 // ----- Beep Functions -----
+// use this function to send musical square waves:
+//
+//     tone(pin, frequency, duration)
+//
+// frequency is in Hertz, and duration is in milliseconds
+//
+// https://docs.arduino.cc/language-reference/en/functions/advanced-io/tone/
+// 
+// the function is non-blocking, which means that it can play in the background,
+// but playing a sequence of tones would block the rest of the program.
+// easier to stick with a single tone for each event here
+
 void beepTriggered() {
   tone(PIEZO_PIN, 1000, 200);
 }
