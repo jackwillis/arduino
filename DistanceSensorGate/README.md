@@ -40,7 +40,7 @@ Also check out [a more bare-bones project using the ultrasonic distance sensor](
 ---
 
 ## Example build
-📌 *There's some extra LEDs in the picture which are not connected.*
+📌 *There's some extra LEDs in the picture which are not part of the project.*
 ![Example project board on a breadboard](build001.jpg)
 
 ## Circuit Diagram
