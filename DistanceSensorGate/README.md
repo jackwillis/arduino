@@ -49,7 +49,7 @@ and upload the program to your Arduino.
 
 ## Circuit Diagram
 ### **Breadboard Layout**  
-📌 *The ultrasonic sensor plugs into the board and points away from the Arduino (towards the top of the screen, not into the screen as depicted).*  
+📌 *The ultrasonic sensor plugs into the board and points away from the Arduino (towards the top of the screen, not into the screen as depicted). Also, the 9V battery should preferably plug into the barrel jack, not into the VIN pin. Or, you can power the system with USB-C.*  
 ![Breadboard Layout](DistanceSensorGate_bb.png)
 
 ### **Schematic**
