@@ -1,5 +1,9 @@
 /*
  * Simplified Gate Controller with Ultrasonic Sensor, Piezo Buzzer, and One LED.
+ * https://github.com/jackwillis/arduino/tree/main/DistanceSensorGate
+ *
+ * Jack Willis <jack@attac.us> 2025, Public Domain
+ * https://creativecommons.org/public-domain/cc0/
  *
  * Behavior:
  * - The LED fades in (brightens) when the gate is triggered (an object is close) and fades out when released.
@@ -53,8 +57,8 @@ void setup() {
   pinMode(ECHO_PIN,   INPUT);
   pinMode(PIEZO_PIN,  OUTPUT);
   pinMode(LED_PIN,    OUTPUT);
-  float init = readUltrasonic();
-  smoothedDistance = constrain(init, MIN_DISTANCE, MAX_DISTANCE);
+  float initialReading = readUltrasonic();
+  smoothedDistance = constrain(initialReading, MIN_DISTANCE, MAX_DISTANCE);
 }
 
 // ----- Main Loop -----
@@ -65,10 +69,13 @@ void loop() {
   updateLED();
   beepOnGateStateChange();
   
-  bool weMightAtAsWellPrint = (gateState != prevGateState) || (frameCounter >= FRAME_INTERVAL);
-  if (weMightAtAsWellPrint) {
-    Serial.print("Raw: "); Serial.print(distance);
-    Serial.print(" cm, Smoothed: "); Serial.print(smoothedDistance);
+  // Print the debug info only when the state changes or the frame counter reaches the limit
+  bool itsTimeToPrint = (gateState != prevGateState) || (frameCounter >= FRAME_INTERVAL);
+  if (itsTimeToPrint) {
+    Serial.print("Raw: ");
+    Serial.print(distance);
+    Serial.print(" cm, Smoothed: ");
+    Serial.print(smoothedDistance);
     Serial.print(" cm, State: ");
     printGateState();
     Serial.println();
@@ -169,9 +176,9 @@ void beepOnGateStateChange() {
 // ----- Function: Print Gate State -----
 void printGateState() {
   switch (gateState) {
-    case IDLE: Serial.print("IDLE"); break;
-    case TRIGGERING: Serial.print("TRIGGERING"); break;
-    case TRIGGERED: Serial.print("TRIGGERED"); break;
-    case RELEASING: Serial.print("RELEASING"); break;
+    case IDLE:        Serial.print("IDLE");       break;
+    case TRIGGERING:  Serial.print("TRIGGERING"); break;
+    case TRIGGERED:   Serial.print("TRIGGERED");  break;
+    case RELEASING:   Serial.print("RELEASING");  break;
   }
 }
