@@ -10,6 +10,8 @@ This project creates an interactive **distance-based gate** using an **ultrasoni
 
 This can be used for **interactive installations**, **shadow boxes**, or **proximity-based lighting effects**.
 
+Also check out [a more bare-bones project using the ultrasonic distance sensor](https://projecthub.arduino.cc/Isaac100/getting-started-with-the-hc-sr04-ultrasonic-sensor-7cabe1) on Arduino Project Hub.
+
 ---
 
 ## How It Works

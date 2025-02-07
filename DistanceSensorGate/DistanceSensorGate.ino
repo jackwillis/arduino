@@ -6,6 +6,9 @@
  * - The piezo buzzer beeps with a high-pitched tone when the gate activates and a low-pitched tone when it deactivates.
  * - A finite state machine (FSM) handles the gate logic.
  * - Serial output is reduced using a frame counter to improve efficiency.
+ *
+ * Check out this documentation:
+ * <https://projecthub.arduino.cc/Isaac100/getting-started-with-the-hc-sr04-ultrasonic-sensor-7cabe1>
  */
 
 // ----- Pin Assignments -----
@@ -62,7 +65,8 @@ void loop() {
   updateLED();
   beepOnGateStateChange();
   
-  if (++frameCounter >= FRAME_INTERVAL || gateState != prevGateState) {
+  bool weMightAtAsWellPrint = (gateState != prevGateState) || (frameCounter >= FRAME_INTERVAL);
+  if (weMightAtAsWellPrint) {
     Serial.print("Raw: "); Serial.print(distance);
     Serial.print(" cm, Smoothed: "); Serial.print(smoothedDistance);
     Serial.print(" cm, State: ");
@@ -70,6 +74,7 @@ void loop() {
     Serial.println();
     frameCounter = 0;
   }
+  frameCounter += 1;
   
   delay(10);
 }
@@ -82,7 +87,7 @@ float readUltrasonic() {
   delayMicroseconds(10);
   digitalWrite(TRIG_PIN, LOW);
   long dur = pulseIn(ECHO_PIN, HIGH, 30000);
-  // Time constant taken from Arduino documentation
+  // Formula taken from Arduino documentation
   return (dur == 0) ? MAX_DISTANCE : (dur * 0.0343) / 2.0;
 }
 
